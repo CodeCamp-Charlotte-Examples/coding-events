@@ -65,7 +65,9 @@ public class EventsController {
     }
 
     @PostMapping("edit")
-    public String processEditForm(@RequestParam int eventId, @RequestParam String name, @RequestParam String description) {
+    public String processEditForm(@RequestParam int eventId,
+                                  @RequestParam String name,
+                                  @RequestParam String description) {
         Event event = EventData.getById(eventId);
         event.setName(name);
         event.setDescription(description);
