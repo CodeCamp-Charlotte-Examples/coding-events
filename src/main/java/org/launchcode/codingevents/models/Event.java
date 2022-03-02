@@ -18,11 +18,7 @@ public class Event extends AbstractEntity {
     @Size(min = 3, max = 50, message = "Name must be at least 3 characters and no longer than 50 characters")
     private String name;
 
-    @Size(max = 500, message = "Max description length is 500")
-    private String description;
-
-    @Email(message = "Invalid email")
-    private String contactEmail;
+    private EventDetails eventDetails;
 
     @ManyToOne
     @NotNull
@@ -30,8 +26,6 @@ public class Event extends AbstractEntity {
 
     public Event(String name, String description, String contactEmail) {
         this.name = name;
-        this.description = description;
-        this.contactEmail = contactEmail;
 
     }
 
@@ -44,22 +38,6 @@ public class Event extends AbstractEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getContactEmail() {
-        return contactEmail;
-    }
-
-    public void setContactEmail(String contactEmail) {
-        this.contactEmail = contactEmail;
     }
 
     public EventCategory getEventCategory() {
