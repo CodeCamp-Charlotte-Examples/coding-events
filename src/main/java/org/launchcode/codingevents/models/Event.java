@@ -1,12 +1,12 @@
 package org.launchcode.codingevents.models;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.Email;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Chris Bay
@@ -18,15 +18,20 @@ public class Event extends AbstractEntity {
     @Size(min = 3, max = 50, message = "Name must be at least 3 characters and no longer than 50 characters")
     private String name;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @Valid
     private EventDetails eventDetails;
 
     @ManyToOne
     @NotNull
     private EventCategory eventCategory;
 
-    public Event(String name, String description, String contactEmail) {
-        this.name = name;
+    @ManyToMany
+    private List<Tag> tags = new ArrayList<>();
 
+    public Event(String name) {
+        this.name = name;
     }
 
     // no-arg constructor
@@ -54,6 +59,14 @@ public class Event extends AbstractEntity {
 
     public void setEventDetails(EventDetails eventDetails) {
         this.eventDetails = eventDetails;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     @Override

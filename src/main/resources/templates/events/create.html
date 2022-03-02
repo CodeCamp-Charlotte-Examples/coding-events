@@ -18,16 +18,16 @@
 
     <div class="form-group">
         <label>Description
-            <input type="text" th:field="${event.description}" class="form-control">
+            <input type="text" th:field="${event.eventDetails.description}" class="form-control">
         </label>
-        <p class="error" th:errors="${event.description}"></p>
+        <p class="error" th:errors="${event.eventDetails.description}"></p>
     </div>
 
     <div class="form-group">
         <label>Contact Email
-            <input type="text" th:field="${event.contactEmail}" class="form-control">
+            <input type="text" th:field="${event.eventDetails.contactEmail}" class="form-control">
         </label>
-        <p class="error" th:errors="${event.contactEmail}"></p>
+        <p class="error" th:errors="${event.eventDetails.contactEmail}"></p>
     </div>
 
     <div class="form-group">
@@ -39,6 +39,14 @@
                 ></option>
             </select>
         </label>
+    </div>
+
+    <div class="form-group">
+        Tags
+        <th:block th:each="tag : ${tags}">
+            <input name="tagIds" type="checkbox" th:value="${tag.id}">
+            <label th:text="${tag.name}"></label>
+        </th:block>
     </div>
 
     <div class="form-group">
