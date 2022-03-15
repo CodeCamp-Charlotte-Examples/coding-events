@@ -24,6 +24,9 @@ public class User extends AbstractEntity {
     @NotBlank
     private String pwHash;
 
+    @NotNull
+    private boolean admin = false;
+
     public User () {}
 
     public User (String username, String password) {
@@ -39,4 +42,11 @@ public class User extends AbstractEntity {
         return encoder.matches(password, this.pwHash);
     }
 
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 }

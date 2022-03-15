@@ -30,14 +30,20 @@ public class AuthenticationFilter implements HandlerInterceptor {
                              HttpServletResponse response,
                              Object handler) throws Exception {
 
+        String requestPath = request.getRequestURI();
+
         // Don't require sign-in for whitelisted pages
-        if (isWhitelisted(request.getRequestURI())) {
+        if (isWhitelisted(requestPath)) {
             // returning true indicates that the request may proceed
             return true;
         }
 
         HttpSession session = request.getSession();
         User user = authenticationController.getUserFromSession(session);
+
+        if (requestPath.startsWith("/events") && !user.isAdmin()) {
+            throw new IllegalAccessException("Path restricted to admin users");
+        }
 
         // The user is logged in
         if (user != null) {
