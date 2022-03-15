@@ -37,7 +37,6 @@ public class Event {
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
-
     }
 
     // no-arg constructor
